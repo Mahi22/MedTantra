@@ -1,0 +1,18 @@
+.dashboard {
+  position: relative;
+  z-index: 2;
+  min-height: 82%;
+
+  .leftContent {
+    width: 32%;
+    display: inline-block;
+    padding: 0 3.125%;
+    color: #fff;
+  }
+
+  .rightContent {
+    width: 68%;
+    display: inline-block;
+    padding: 0 3.125%;
+  }
+}

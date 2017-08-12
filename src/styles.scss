@@ -16,10 +16,11 @@ html {
 
 body {
   letter-spacing: 0.5px;
+  overflow-y: auto;
 }
 
 .b--light-grey {
-  background-color: #fafafa;
+  background-color: #eee;
 }
 
 .b--hover {
@@ -54,9 +55,9 @@ body {
 }
 
 .hm_100 {
-  // height: auto;
-  height: 100%;
-  min-height: 100%;
+  height: auto;
+  // height: 100%;
+  min-height: 100vh;
 }
 
 .mb_0 {
@@ -65,6 +66,10 @@ body {
 
 .mb_12 {
   margin-bottom: 1.2rem;
+}
+
+.mb_15 {
+  margin-bottom: 1.5rem;
 }
 
 .mh_05 {

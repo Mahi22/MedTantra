@@ -46,7 +46,7 @@ $input-radius: $radius !default;
     color: $input-disabled;
 
     @include placeholder {
-      color: rgba($input, 0.3);
+      color: rgba($input, 0.1);
     }
   }
 }

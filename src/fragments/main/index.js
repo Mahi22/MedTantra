@@ -49,6 +49,7 @@ import { Redirect } from 'kit/lib/routing';
 // multiple components per file where it makes sense to do so
 import { Home, Page, WhenNotFound } from 'src/fragments/routes';
 import Login from 'src/fragments/login';
+import Base from 'src/fragments/base';
 
 // Get the MedTantra logo.  This is a local .svg file, which will be made
 // available as a string relative to [root]/dist/assets/img/
@@ -67,6 +68,7 @@ export default () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/dashboard" component={Base} />
       <Route path="/page/:name" component={Page} />
       <Redirect from="/old/path" to="/new/path" />
       <Route component={WhenNotFound} />
