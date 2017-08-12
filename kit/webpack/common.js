@@ -52,7 +52,8 @@ export const css = {
     minimize: false,
 
     // Format for 'localised' CSS modules
-    localIdentName: '[local]-[hash:base64]',
+    // -[hash:base64]
+    localIdentName: '[local]',
 
     // Retain the loader pipeline
     importLoaders: 1,

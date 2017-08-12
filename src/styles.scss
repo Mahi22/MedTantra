@@ -1,0 +1,156 @@
+@import "scss/utilities/_all";
+@import "scss/base/_all";
+@import "scss/grid/_all";
+@import "scss/components/_all";
+@import "scss/elements/_all";
+
+html, body, #main {
+  height: 100%;
+}
+
+html {
+  background-color: #fafafa;
+  position: relative;
+  overflow: hidden;
+}
+
+body {
+  letter-spacing: 0.5px;
+}
+
+.b--light-grey {
+  background-color: #fafafa;
+}
+
+.b--hover {
+  &:hover {
+    background-color: rgba($black, 0.2);
+    cursor: pointer;
+  }
+}
+
+.bb_0 {
+  border-bottom: 0;
+}
+
+.dn {
+  display: none;
+}
+
+.fc_g {
+  color: #98c652;
+}
+
+.fc_r {
+  color: #ff3860;
+}
+
+.fw9 {
+  font-weight: 900;
+}
+
+.h_100 {
+  height: 100%;
+}
+
+.hm_100 {
+  // height: auto;
+  height: 100%;
+  min-height: 100%;
+}
+
+.mb_0 {
+  margin-bottom: 0;
+}
+
+.mb_12 {
+  margin-bottom: 1.2rem;
+}
+
+.mh_05 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mh_12 {
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+}
+
+.mv_12 {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.mt_100 {
+  margin-top: 100px;
+}
+
+.pa_0 {
+  padding: 0;
+}
+
+.pa_05 {
+  padding: 0.5rem;
+}
+
+.pa_12 {
+  padding: 1.2rem;
+}
+
+.ph_0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ph_1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.ph_15 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.pr_12 {
+  padding-right: 1.2rem;
+}
+
+.pt_5 {
+  padding-top: 4rem;
+}
+
+.pv_0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.pv_12 {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.pv_2 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+
+.ta_c {
+  text-align: center;
+}
+
+.ta_r {
+  text-align: right;
+}
+
+.w_100 {
+  width: 100%;
+}
+
+.appLoading {
+  color: $white;
+  font-size: 1.5rem;
+  text-align: center;
+}

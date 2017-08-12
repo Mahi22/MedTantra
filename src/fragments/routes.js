@@ -20,12 +20,14 @@ import PropTypes from 'prop-types';
 
 // NotFound 404 handler for unknown routes
 import { NotFound } from 'kit/lib/routing';
-
+import { Card } from 'src/components/Card';
 // ----------------------
 
 // We'll display this <Home> component when we're on the / route
 export const Home = () => (
-  <h1>You&apos;re on the home page - click another link above</h1>
+  <Card>
+    <h1>You&apos;re on the home page - click another link above</h1>
+  </Card>
 );
 
 // Helper component that will be conditionally shown when the route matches.

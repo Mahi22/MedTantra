@@ -1,0 +1,19 @@
+.toggleContainer {
+  display: none;
+  overflow: hidden;
+
+  &.is-active {
+    display: flex;
+  }
+
+  .title {
+    font-size: 21px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .listValues {
+    font-size: 14px;
+    margin: 12px auto;
+  }
+}
