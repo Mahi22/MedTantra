@@ -1,9 +1,17 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import {CSVLink, CSVDownload} from 'react-csv';
 import { Columns, Column } from 'src/grid';
 import { Card } from 'src/components/Card';
-import { Button } from 'src/elements';
+import { Button, Title } from 'src/elements';
 import './upload.scss';
+
+const csvData = [
+  ['firstname', 'lastname', 'email'] ,
+  ['Ahmed', 'Tomi' , 'ah@smthing.co.com'] ,
+  ['Raed', 'Labes' , 'rl@smthing.co.com'] ,
+  ['Yezzi','Min l3b', 'ymin@cocococo.com']
+];
 
 class Upload extends React.Component {
   constructor(props) {
@@ -33,7 +41,10 @@ class Upload extends React.Component {
             </Columns>
           </Dropzone>
           <div className="rightContent">
-            Right Upload
+            <Title className="mb_15">Upload Medical Report</Title>
+            <p className="mb_12">For the current demo to showcase functionality we are using mechanism to upload *.csv file and creating reports.</p>
+            <p className="mb_12">To download the csv format to test the application <Button className="is-apollo"><CSVLink data={csvData} filename={"csvdata_format.csv"}>Click Here</CSVLink></Button></p>
+            <p className="mb_12">To download the &nbsp;demo &nbsp;csv to test the application <Button className="is-apollo"><CSVLink data={csvData} filename={"dummy_csvdata.csv"}>Click Here</CSVLink></Button></p>
           </div>
         </Columns>
       </Card>
