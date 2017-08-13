@@ -79,6 +79,7 @@
   "dependencies": {
     "apollo-local-query": "^0.3.0",
     "apollo-server-koa": "^1.0.5",
+    "axios": "^0.16.2",
     "boxen": "^1.2.1",
     "chalk": "^2.1.0",
     "classnames": "^2.2.5",

@@ -21,7 +21,7 @@ import config from 'kit/config';
 /* App */
 
 // Example counter reducer.  This simply increments the counter by +1
-import counterReducer from 'src/reducers/counter';
+import uploadReducer from 'src/reducers/upload';
 
 // Main component -- i.e. the 'root' React component in our app
 import Main from 'src/fragments/main';
@@ -36,7 +36,7 @@ import './styles.scss';
 
 // Add our custom `counter` reducer.  This must follow the shape
 // {state, reducer()}, otherwise it will throw an error
-config.addReducer('counter', counterReducer);
+config.addReducer('upload', uploadReducer);
 
 // Set our server config, by checking `SERVER` -- this code path will be
 // eliminated by Webpack in the browser, so we can safely add this.

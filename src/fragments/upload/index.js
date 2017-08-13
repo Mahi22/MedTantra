@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from "react-redux";
 import Dropzone from 'react-dropzone';
+import axios from 'axios';
 import {CSVLink, CSVDownload} from 'react-csv';
 import { Columns, Column } from 'src/grid';
 import { Card } from 'src/components/Card';
@@ -7,19 +9,65 @@ import { Button, Title } from 'src/elements';
 import './upload.scss';
 
 const csvData = [
-  ['firstname', 'lastname', 'email'] ,
-  ['Ahmed', 'Tomi' , 'ah@smthing.co.com'] ,
-  ['Raed', 'Labes' , 'rl@smthing.co.com'] ,
-  ['Yezzi','Min l3b', 'ymin@cocococo.com']
+  ['BP_SYSTOLIC', 'BP_DIASTOLIC'] ,
 ];
 
+
+// Redux action
+function uploadSuccess({ data }) {
+  console.log(data);
+  return {
+    type: 'UPLOAD_DOCUMENT_SUCCESS',
+    data,
+  };
+}
+
+function uploadFail(error) {
+  return {
+    type: 'UPLOAD_DOCUMENT_FAIL',
+    error,
+  };
+}
+
+function uploadStart() {
+  return {
+    type: 'UPLOAD_DOCUMENT_SUBMIT'
+  };
+}
+
+
+function uploadDocumentRequest({ file, name, history }) {
+  let data = new FormData();
+  data.append('file', file);
+  data.append('name', name);
+  data.append('customer', 'customer1');
+
+  return (dispatch) => {
+    axios.post(' http://localhost:4000/files', data)
+      .then(response => {
+        console.log(response);
+        dispatch(uploadSuccess(response));
+        history.push('/dashboard/report/');
+      })
+      .catch(error => dispatch(uploadFail(error)));
+  };
+}
+
+@connect()
 class Upload extends React.Component {
+
   constructor(props) {
     super(props);
   }
 
   onDrop(accepted, rejected) {
-    console.log(accepted);
+    if (accepted.length > 0) {
+      this.props.dispatch(uploadDocumentRequest({
+        file: accepted[0],
+        name: 'Medi CSV',
+        history: this.props.history
+      }));
+    }
   }
 
   render() {
@@ -33,7 +81,7 @@ class Upload extends React.Component {
             </div>
             <Columns isCentered className="pv_2 content">
               <Column>
-                <Button className="is-apollo button" onClick={() => { dropzoneRef.open() }}>Upload File</Button>
+                <Button className="is-primary button" onClick={() => { dropzoneRef.open() }}>Upload File</Button>
               </Column>
               <Column className="ta_l info">
                 OR DRAG AND DROP CSV HERE
@@ -53,3 +101,17 @@ class Upload extends React.Component {
 }
 
 export default Upload;
+
+
+// let timer = null;
+// let complete = null;
+//
+// if (this.props.upload.type === 'LOADING') {
+//   timer = setInterval(() => {
+//     complete = complete + 1;
+//   }, .11)
+// } else if (this.props.upload.type === 'SUCCESS' && timer !== null) {
+//   clearInterval(timer);
+//   timer = null;
+//   // complete = null;
+// }

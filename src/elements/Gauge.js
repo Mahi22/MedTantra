@@ -5,7 +5,7 @@ export default class Gauge extends Component {
 		label: "SVG Gauge",
 		min: 0,
 		max: 100,
-		value: 40,
+		value: 50,
 		width: 200,
 		height: 160,
 		color: '#fe0400',
@@ -81,7 +81,7 @@ export default class Gauge extends Component {
 						{ this.props.label }
 					</text>
 					<text x={this.props.width / 2} y={this.props.height / 5 * 4} textAnchor="middle" style={valueLabelStyle}>
-						{ this.props.value }
+						{ this.props.displayValue }
 					</text>
 				</svg>
 		);
