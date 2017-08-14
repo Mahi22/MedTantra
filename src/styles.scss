@@ -3,6 +3,7 @@
 @import "scss/grid/_all";
 @import "scss/components/_all";
 @import "scss/elements/_all";
+@import "./node_modules/react-vis/dist/style";
 
 html, body, #main {
   height: 100%;
@@ -36,10 +37,6 @@ body {
 
 .bb_1 {
   border-bottom: 1px solid rgba($white, 0.2);
-}
-
-.bbb_1 {
-  border-bottom: 1px solid rgba($black, 0.2);
 }
 
 .dn {

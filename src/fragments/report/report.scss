@@ -42,6 +42,30 @@
         }
       }
     }
+
+    .chart {
+      padding: 10px !important;
+      border: 1px solid rgba(black, 0.2);
+
+      .header {
+        text-align: center;
+        color: rgb(153, 153, 153);
+        stroke: none;
+        font-style: normal;
+        font-variant-ligatures: normal;
+        font-variant-caps: normal;
+        font-weight: bold;
+        font-stretch: normal;
+        line-height: normal;
+        fill-opacity: 1;
+        font-size: 20px;
+        margin-bottom: 1rem;
+
+        .dummy {
+          font-size: 10px;
+        }
+      }
+    }
   }
 
   .content {

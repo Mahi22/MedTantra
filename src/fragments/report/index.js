@@ -4,6 +4,7 @@ import { Card } from 'src/components/Card';
 import { Button, Title, Gauge, Icon } from 'src/elements';
 import { Nav, NavLeft, NavRight } from 'src/components/Nav';
 import { Tabs, TabList, Tab, TabLink } from 'src/components/Tabs';
+import Chart from './chart';
 import './report.scss';
 
 
@@ -14,6 +15,7 @@ class Report extends React.Component {
       index: 0,
       height: '100%',
       innerHeight: '100%',
+      innerWidth: 100,
     };
   }
 
@@ -29,7 +31,8 @@ class Report extends React.Component {
 
   componentDidMount() {
     const height = this.divElement.clientHeight;
-    this.setState({ innerheight: (height - ((height * 0.0566219282) + 70)), height });
+    const width = this.divElement.clientWidth;
+    this.setState({ innerheight: (height - ((height * 0.0566219282) + 70)), height, innerWidth: (width - ((width * 0.098026) + 20))  });
   }
 
   renderPhyscial(height, weight) {
@@ -151,11 +154,11 @@ class Report extends React.Component {
             </Nav>
             <div className=" mv_12 pv_12 ph_15">
               <div className="fw9">Mr. XYZ</div>
-              <div className="pb_02 mb_12 bb_1"><span className="fw9">{this.props.report[index].age}</span> years old, <span className="fw9">{this.props.report[index].gender}</span></div>
+              <div className="pb_02 mb_12 bb_1"><span className="fw9">{this.props.report ? this.props.report[index].age : null}</span> years old, <span className="fw9">{this.props.report ? this.props.report[index].gender : null}</span></div>
               <div className="ttu pb_02 mb_12 bb_1">Apollo PERSONALIZED HEALTH CHECK</div>
-              <div className="mb_02"><span className="fw9">MRN: </span><span>{this.props.report[index].mrn}</span></div>
-              <div className="mb_12 pb_02 bb_1"><span className="fw9">VISIT NUMBER: </span><span>{this.props.report[index].visitNumber}</span></div>
-              <div className="mb_02"><span className="fw9">DATE OF CHECK UP: </span><span>{this.props.report[index].dot}</span></div>
+              <div className="mb_02"><span className="fw9">MRN: </span><span>{this.props.report ? this.props.report[index].mrn : null}</span></div>
+              <div className="mb_12 pb_02 bb_1"><span className="fw9">VISIT NUMBER: </span><span>{this.props.report ? this.props.report[index].visitNumber : null}</span></div>
+              <div className="mb_02"><span className="fw9">DATE OF CHECK UP: </span><span>{this.props.report ? this.props.report[index].dot: null}</span></div>
               <div className="mb_12 pb_02"><span className="fw9">EXAMINED BY: </span><span></span>Dr. ABC</div>
             </div>
           </div>
@@ -186,6 +189,10 @@ class Report extends React.Component {
             <div style={{ minHeight: `${this.state.innerheight}px` }} className="content">
               {this.renderPhyscial(this.props.report ? this.props.report[index].height : 0, this.props.report ? this.props.report[index].weight : 0)}
               {this.renderInvestigations(this.props.report ? this.props.report[index].cardioVascular : [])}
+              <div className="chart">
+                <div className="header">Heart Rate <span className="dummy">(dummy)</span></div>
+                <Chart width={this.state.innerWidth} index={this.state.index} />
+              </div>
             </div>
           </div>
         </Columns>
