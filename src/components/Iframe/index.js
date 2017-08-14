@@ -28,4 +28,5 @@ Iframe.propTypes = {
   styles: PropTypes.object,
   allowFullScreen: PropTypes.bool
 }
+
 export default Iframe;

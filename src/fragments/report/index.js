@@ -1,21 +1,28 @@
 import React from 'react';
+
 import { Columns, Column, Tile } from 'src/grid';
 import { Card } from 'src/components/Card';
+import Iframe from 'src/components/Iframe';
 import { Button, Title, Gauge, Icon } from 'src/elements';
 import { Nav, NavLeft, NavRight } from 'src/components/Nav';
 import { Tabs, TabList, Tab, TabLink } from 'src/components/Tabs';
 import Chart from './chart';
 import './report.scss';
 
+// import jsPDF from 'jsPDF';
+// import html2canvas from 'html2canvas';
+
 
 class Report extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      view: 'WEB',
       index: 0,
       height: '100%',
       innerHeight: '100%',
       innerWidth: 100,
+      source: null,
     };
   }
 
@@ -135,6 +142,44 @@ class Report extends React.Component {
     )
   }
 
+  makePdf() {
+    // const pdf = new jsPDF('p', 'pt', 'letter');
+    // const canvas = pdf.canvas;
+    // canvas.width = 8.5 * 72;
+    // const that = this;
+    //
+    // html2canvas(document.body, {
+    //   canvas,
+    //   onrendered: () => {
+    //     that.setState({...this.state, view: 'PDF', source: pdf.output('datauristring')});
+    //   }
+    // });
+    that.setState({...this.state, view: 'PDF'});
+  }
+
+  renderPdf(height) {
+    return (
+      <Iframe url={this.state.source}
+              display="initial"
+              position="relative"
+              height={`${height}px`}
+              allowFullScreen />
+    );
+  }
+
+  renderWeb(index) {
+    return (
+      <div id="capture" style={{ minHeight: `${this.state.innerheight}px` }} className="content">
+        {this.renderPhyscial(this.props.report ? this.props.report[index].height : 0, this.props.report ? this.props.report[index].weight : 0)}
+        {this.renderInvestigations(this.props.report ? this.props.report[index].cardioVascular : [])}
+        <div className="chart">
+          <div className="header">Heart Rate <span className="dummy">(dummy)</span></div>
+          <Chart width={this.state.innerWidth} index={index} />
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let dropzoneRef = null;
     const { index } = this.state;
@@ -170,13 +215,13 @@ class Report extends React.Component {
               <NavRight>
               <Tabs className="is-apollo">
                 <TabList>
-                    <Tab isActive>
+                    <Tab isActive={this.state.view === 'WEB'} onClick={() => this.setState({...this.state, view: 'WEB'})}>
                         <TabLink>
                             <Icon isSize='small'><span className='fa fa-laptop' aria-hidden='true' /></Icon>
                             <span>WEB VERSION</span>
                         </TabLink>
                     </Tab>
-                    <Tab>
+                    <Tab isActive={this.state.view === 'PDF'} onClick={() => this.makePdf()}>
                         <TabLink>
                             <Icon isSize='small'><span className='fa fa-file' aria-hidden='true' /></Icon>
                             <span>PDF VERSION</span>
@@ -186,14 +231,7 @@ class Report extends React.Component {
               </Tabs>
               </NavRight>
             </Nav>
-            <div style={{ minHeight: `${this.state.innerheight}px` }} className="content">
-              {this.renderPhyscial(this.props.report ? this.props.report[index].height : 0, this.props.report ? this.props.report[index].weight : 0)}
-              {this.renderInvestigations(this.props.report ? this.props.report[index].cardioVascular : [])}
-              <div className="chart">
-                <div className="header">Heart Rate <span className="dummy">(dummy)</span></div>
-                <Chart width={this.state.innerWidth} index={this.state.index} />
-              </div>
-            </div>
+            {this.state.view === 'WEB' ? this.renderWeb(index) : this.renderPdf(this.state.innerheight)}
           </div>
         </Columns>
       </Card>
@@ -202,8 +240,3 @@ class Report extends React.Component {
 }
 
 export default Report;
-
-// <Iframe url="http://bhgp.bayviewhotels.com/application/files/3714/6768/5143/demo.pdf"
-//         display="initial"
-//         position="relative"
-//         allowFullScreen />

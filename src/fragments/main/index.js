@@ -27,7 +27,7 @@
 
 // React
 import React from 'react';
-
+import { connect } from "react-redux";
 // Routing via React Router
 import {
   Route,
@@ -56,22 +56,33 @@ import Base from 'src/fragments/base';
 // import logo from './reactql-logo.svg';
 
 // ----------------------
-
-export default () => (
-  <div className="h_100">
-    <Helmet
-      title="MedTantra application"
-      meta={[{
-        name: 'description',
-        content: 'MedTantra starter kit app',
-      }]} />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/dashboard" component={Base} />
-      <Route path="/page/:name" component={Page} />
-      <Redirect from="/old/path" to="/new/path" />
-      <Route component={WhenNotFound} />
-    </Switch>
-  </div>
-);
+@connect((state) => ({ loggedin: state.loggedin.loggedin }))
+export default class Main extends React.PureComponent {
+  render() {
+    const { loggedin } = this.props;
+    return (
+      <div className="h_100">
+        <Helmet
+          title="MedTantra application"
+          meta={[{
+            name: 'description',
+            content: 'MedTantra starter kit app',
+          }]} />
+        <Switch>
+          <Route exact path="/" render={({history}) => (
+            loggedin ? (
+              <Redirect to="/dashboard/upload" />
+            ) : (
+              <Login history={history} />
+            )
+          )} />
+          <Route excat path="/login/" component={Login} />
+          <Route path="/dashboard" component={Base} />
+          <Route path="/page/:name" component={Page} />
+          <Redirect from="/old/path" to="/new/path" />
+          <Route component={WhenNotFound} />
+        </Switch>
+      </div>
+    );
+  }
+}

@@ -16,7 +16,7 @@ import Immutable from 'seamless-immutable';
 // a call to `Immutable()` makes it impossible for us to accidentally change
 // this outside of Redux, which is a good pattern to enforce
 const initialState = Immutable({
-  count: 0,
+  loggedin: false,
 });
 
 export default {
@@ -26,9 +26,15 @@ export default {
   // function that handles the 'listening' to Redux to know how to manipulate state
   state: initialState,
   reducer(state = initialState, action) {
-    if (action.type === 'INCREMENT_COUNTER') {
+    if (action.type === 'LOGIN') {
       return state.merge({
-        count: state.count + 1,
+        loggedin: true,
+      });
+    }
+
+    if (action.type === 'LOGOUT') {
+      return state.merge({
+        loggedin: false,
       });
     }
     return state;
